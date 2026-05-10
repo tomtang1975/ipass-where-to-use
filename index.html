@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>哪裡可以用？ - iPASS MONEY</title>
+<style>
+/* ========== 全域重置 ========== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  background:#f7f7f5;
+  color:#2c2c2c;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased
+}
+
+/* ========== 品牌色調 ========== */
+:root{
+  --brand:#70BF45;
+  --brand-dark:#10A83B;
+  --brand-deep:#008a2e;
+  --accent:#FF7761;
+  --brown:#947054;
+  --bg:#f7f7f5;
+  --card-bg:#ffffff;
+  --text:#2c2c2c;
+  --text-muted:#6b6b6b;
+  --border:#e8e6e0;
+  --green-soft:#f0f8ea;
+  --shadow:0 2px 12px rgba(0,0,0,0.06);
+  --radius:12px;
+}
+
+/* ========== Header ========== */
+.header{
+  background:linear-gradient(135deg,#70BF45 0%,#10A83B 100%);
+  color:#fff;
+  padding:48px 24px 56px;
+  text-align:center;
+  position:relative;
+  overflow:hidden
+}
+.header::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events:none
+}
+.header-content{position:relative;z-index:1;max-width:680px;margin:0 auto}
+.header-icon{width:56px;height:56px;margin-bottom:16px;background:rgba(255,255,255,0.2);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:28px;backdrop-filter:blur(4px)}
+.header h1{font-size:32px;font-weight:800;letter-spacing:-0.02em;margin-bottom:8px}
+.header p{font-size:16px;opacity:0.9;max-width:520px;margin:0 auto;line-height:1.5}
+
+/* ========== Search ========== */
+.search-wrap{max-width:860px;margin:-28px auto 0;padding:0 20px;position:relative;z-index:10}
+.search-box{
+  display:flex;align-items:center;
+  background:#fff;border-radius:14px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.08);
+  padding:4px 4px 4px 20px;
+  border:1px solid var(--border)
+}
+.search-box:focus-within{border-color:var(--brand);box-shadow:0 4px 24px rgba(112,191,69,0.18)}
+.search-box .icon{font-size:18px;opacity:0.4;margin-right:10px}
+.search-box input{
+  flex:1;border:none;outline:none;
+  font-size:16px;padding:14px 0;
+  background:transparent;color:var(--text)
+}
+.search-box input::placeholder{color:#b0b0a8}
+.search-box .count{
+  font-size:13px;color:var(--text-muted);
+  background:var(--bg);padding:6px 14px;
+  border-radius:20px;margin-right:4px;white-space:nowrap
+}
+
+/* ========== Container ========== */
+.container{max-width:1100px;margin:0 auto;padding:0 20px}
+
+/* ========== 分類導航 ========== */
+.nav-bar{
+  display:flex;gap:8px;overflow-x:auto;
+  padding:32px 20px 8px;max-width:1100px;
+  margin:0 auto;scrollbar-width:none;
+  -ms-overflow-style:none;
+  -webkit-overflow-scrolling:touch
+}
+.nav-bar::-webkit-scrollbar{display:none}
+.nav-chip{
+  flex-shrink:0;padding:8px 18px;
+  border-radius:20px;border:1px solid var(--border);
+  background:#fff;font-size:14px;color:var(--text-muted);
+  cursor:pointer;transition:all 0.2s;
+  white-space:nowrap;font-weight:500
+}
+.nav-chip:hover{border-color:var(--brand);color:var(--brand)}
+.nav-chip.active{
+  background:var(--brand);color:#fff;
+  border-color:var(--brand)
+}
+
+/* ========== 統計條 ========== */
+.stats{
+  display:flex;gap:24px;padding:24px 0 8px;
+  flex-wrap:wrap;align-items:center
+}
+.stat-item{font-size:14px;color:var(--text-muted)}
+.stat-item strong{color:var(--brand-dark);font-size:18px;margin-right:2px}
+
+/* ========== 分類區塊 ========== */
+.section{margin-bottom:28px}
+.section-header{
+  display:flex;align-items:center;gap:12px;
+  margin-bottom:16px;padding-bottom:10px;
+  border-bottom:2px solid var(--bg)
+}
+.section-header .emoji{
+  width:36px;height:36px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0
+}
+.section-header h2{font-size:20px;font-weight:700;color:var(--brown)}
+.section-header .count-badge{
+  margin-left:auto;
+  background:var(--green-soft);color:var(--brand-dark);
+  font-size:13px;padding:2px 12px;border-radius:12px;
+  font-weight:600
+}
+.brand-accent .section-header h2{color:var(--brand-dark)}
+.brand-accent .section-header .emoji{background:var(--green-soft)}
+
+/* ========== 商家卡片 ========== */
+.brand-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:8px
+}
+.brand-tag{
+  display:flex;align-items:center;gap:8px;
+  background:#fff;padding:10px 14px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  font-size:14px;color:var(--text);
+  transition:all 0.15s;
+  cursor:default
+}
+.brand-tag:hover{
+  border-color:var(--brand);
+  box-shadow:0 2px 8px rgba(112,191,69,0.1);
+  transform:translateY(-1px)
+}
+.brand-tag.has-link{cursor:pointer}
+.brand-tag.has-link:hover .brand-name{color:var(--brand-dark);text-decoration:underline}
+.brand-tag a{color:inherit;text-decoration:none;display:flex;align-items:center;gap:8px;width:100%}
+.brand-tag .dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--brand);flex-shrink:0;
+  opacity:0.5
+}
+.brand-tag .brand-name{font-weight:500}
+.brand-tag .brand-sub{
+  font-size:12px;color:var(--text-muted);
+  margin-left:auto;white-space:nowrap
+}
+
+/* ========== 大類別卡片（TWQR/超商等特殊大類） ========== */
+.hero-card{
+  background:linear-gradient(135deg,var(--green-soft) 0%,#fff 100%);
+  border:1px solid rgba(112,191,69,0.2);
+  border-radius:var(--radius);
+  padding:20px 24px;
+  margin-bottom:24px;
+  display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;
+  box-shadow:var(--shadow)
+}
+.hero-card .hc-icon{
+  width:56px;height:56px;border-radius:12px;
+  background:var(--brand);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;overflow:hidden
+}
+.hero-card h3{font-size:16px;font-weight:700;color:var(--brand-dark)}
+.hero-card p{
+  font-size:14px;color:var(--text-muted);
+  flex:1;min-width:200px;line-height:1.5
+}
+.hero-card .tagline{
+  font-size:13px;font-weight:600;
+  color:var(--brand-dark);
+  background:rgba(112,191,69,0.1);
+  padding:4px 14px;border-radius:20px;
+  white-space:nowrap
+}
+
+/* ========== 註腳 ========== */
+.footer-note{
+  text-align:center;padding:48px 20px 40px;
+  color:var(--text-muted);font-size:14px
+}
+.footer-note .brand-icon{
+  display:inline-block;
+  background:linear-gradient(135deg,#70BF45,#10A83B);
+  color:#fff;width:40px;height:40px;
+  border-radius:50%;line-height:40px;
+  font-size:18px;margin-bottom:12px
+}
+.footer-note p{max-width:480px;margin:0 auto;line-height:1.6}
+
+/* ========== 隱藏控制 ========== */
+.hidden{display:none !important}
+
+/* ========== 回到頂部 ========== */
+.back-top{
+  position:fixed;bottom:32px;right:32px;
+  width:44px;height:44px;border-radius:50%;
+  background:var(--brand);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;box-shadow:0 4px 16px rgba(112,191,69,0.3);
+  cursor:pointer;opacity:0;visibility:hidden;
+  transition:all 0.3s;border:none;z-index:100
+}
+.back-top.show{opacity:1;visibility:visible}
+.back-top:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(112,191,69,0.4)}
+.back-top:active{transform:translateY(-1px)}
+
+/* ========== Responsive ========== */
+@media(max-width:640px){
+  .header{padding:36px 20px 48px}
+  .header h1{font-size:26px}
+  .search-wrap{margin-top:-24px}
+  .brand-grid{grid-template-columns:1fr}
+  .brand-tag{flex-wrap:wrap;gap:4px 8px}
+  .brand-tag .brand-sub{margin-left:0;white-space:normal;font-size:11px;line-height:1.4;color:#888}
+  .stats{padding:16px 0 4px;gap:16px}
+  .hero-card{padding:16px}
+  .hero-card .tagline{white-space:normal}
+  .nav-chip{padding:6px 14px;font-size:13px}
+  .back-top{bottom:20px;right:20px;width:40px;height:40px}
+}
+</style>
+</head>
+<body>
+
+<!-- ====== Header ====== -->
+<header class="header">
+  <div class="header-content">
+    <div class="header-icon">📍</div>
+    <h1>哪裡可以用？</h1>
+    <p>全台超過 20 大類通路、數百家品牌，通通可以用 iPASS MONEY 付款</p>
+  </div>
+</header>
+
+<!-- ====== Search ====== -->
+<div class="search-wrap">
+  <div class="search-box">
+    <span class="icon">🔍</span>
+    <input type="text" id="searchInput" placeholder="搜尋通路、品牌名稱…" autocomplete="off">
+    <span class="count" id="resultCount">87 個品牌</span>
+  </div>
+</div>
+
+<!-- ====== 導航 ====== -->
+<nav class="nav-bar" id="navBar">
+  <div class="nav-chip active" data-cat="all">全部</div>
+</nav>
+
+<!-- ====== Main ====== -->
+<main class="container" id="mainContent">
+
+  <!-- Stats -->
+  <div class="stats" id="statsBar"></div>
+
+  <!-- TWQR Hero Card -->
+  <div class="hero-card" data-category="twqr">
+    <div class="hc-icon">📱</div>
+    <h3>TWQR 立牌</h3>
+    <p>只要看到 TWQR 立牌均可掃碼付款，涵蓋全支付、街口、悠遊付、台灣 Pay 等共同標示通路</p>
+    <span class="tagline">一碼通行全台</span>
+  </div>
+
+  <!-- Sections will be rendered by JS -->
+  <div id="categorySections"></div>
+
+</main>
+
+<!-- ====== Footer ====== -->
+<footer class="footer-note">
+  <div class="brand-icon">💚</div>
+  <p>本頁列出 iPASS MONEY 主要適用通路，實際可使用商家以現場標示為準。<br>更多資訊請見 <a href="https://www.i-pass.com.tw" style="color:var(--brand-dark);text-decoration:none;font-weight:600">iPASS 一卡通官網</a></p>
+</footer>
+
+<!-- ====== Back to Top ====== -->
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// ========== Data ==========
+const CATEGORIES = [
+  { id:'store', title:'超商／超市',   emoji:'🏪', color:'#f0f8ea', brands:[
+    { name:'7-ELEVEN', url:'https://www.7-11.com.tw' },
+    { name:'全家便利商店', url:'https://www.family.com.tw' },
+    { name:'萊爾富', url:'https://www.hilife.com.tw' },
+    { name:'OK超商', url:'https://www.okmart.com.tw' },
+    { name:'美廉社', url:'https://www.simplemart.com.tw' },
+    { name:'心樸市集' },
+    { name:'媽媽魚安心超市', url:'https://www.mamafish.com' },
+    { name:'棉花田生機園地', url:'https://www.sun-organism.com.tw' }
+  ]},
+  { id:'gas',   title:'加油站',       emoji:'⛽', color:'#f0f8ea', brands:[
+    { name:'中油加油站', url:'https://www.cpc.com.tw' },
+    { name:'台亞加油站' },
+    { name:'台糖加油站', url:'https://www.taisugar.com.tw' }
+  ]},
+  { id:'tea',   title:'飲料就喝',     emoji:'🧋', color:'#f0f8ea', brands:[
+    { name:'可不可熟成紅茶', url:'https://kebuke.com' },
+    { name:'得正', url:'https://dejeng.com/drinks/' },
+    { name:'鮮茶道', url:'https://www.presotea.com' },
+    { name:'茶湯會' },
+    { name:'COMEBUY', url:'https://www.comebuy.com.tw' },
+    { name:'珍煮丹', url:'https://www.truedan.com.tw' },
+    { name:'大苑子', url:'https://www.dayungs.com' },
+    { name:'Mr Wish' },
+    { name:'萬波', url:'https://www.wanpotea.com' },
+    { name:'五十嵐' },
+    { name:'思茶', url:'https://www.missingtea.com.tw' },
+    { name:'壽奶茶' },
+    { name:'特好喝' },
+    { name:'約翰紅茶' },
+    { name:'水巷茶弄' }
+  ]},
+  { id:'coffee', title:'咖啡最愛',    emoji:'☕', color:'#f0f8ea', brands:[
+    { name:'星巴克', url:'https://www.starbucks.com.tw' },
+    { name:'CAMA咖啡', url:'https://www.camacafe.com' },
+    { name:'MINI.D' },
+    { name:'卡啡那' }
+  ]},
+  { id:'food',  title:'美味都在這',   emoji:'🍽️',color:'#f0f8ea', brands:[
+    { name:'麥當勞', sub:'手機點餐／歡樂送2.0', url:'https://www.mcdonalds.com.tw' },
+    { name:'摩斯漢堡', url:'https://www.mos.com.tw' },
+    { name:'三商餐飲集團', sub:'三商巧福、拿坡里、三商炸雞、福勝亭、三商鮮五丼、品川蘭、BANCO 等', url:'https://www.mercuries.com.tw' },
+    { name:'晨間廚房', url:'https://www.mk2000.com.tw' },
+    { name:'達利早餐' },
+    { name:'早點 Morning', sub:'線上點餐' },
+    { name:'多那之', url:'https://www.donutes.com.tw' },
+    { name:'吳寶春麥方店', url:'https://www.wupaochun.com' },
+    { name:'鬍鬚張' },
+    { name:'搖滾PIZZA' },
+    { name:'金色三麥', url:'https://www.lebledor.com' },
+    { name:'Luigi 路易奇' },
+    { name:'築間幸福鍋物', url:'https://www.jhujian.com.tw' },
+    { name:'雞湯桑' },
+    { name:'雞湯大叔' },
+    { name:'古典玫瑰園', url:'https://www.rosehouse.com' },
+    { name:'作燴 ZoheyEats', sub:'線上點餐' }
+  ]},
+  { id:'elec',  title:'家電／3C&配件', emoji:'💻', color:'#f0f8ea', brands:[
+    { name:'燦坤3C' },
+    { name:'全國電子', url:'https://www.eclife.com.tw' },
+    { name:'傑昇通信' },
+    { name:'Q哥3C', url:'https://www.qek888.com' },
+    { name:'日本橋' },
+    { name:'犀牛盾 RHINOSHIELD', sub:'門市與官網', url:'https://www.rhinoshield.com.tw' },
+    { name:'台灣飛利浦家電', sub:'官網', url:'https://www.philips.com.tw' },
+    { name:'未來實驗室', sub:'官網', url:'https://www.futurelab.tw' },
+    { name:'unipapa', sub:'官網', url:'https://www.unipapa.com' }
+  ]},
+  { id:'shop',  title:'線上購物',     emoji:'🛒', color:'#f0f8ea', brands:[
+    { name:'momo購物網', url:'https://www.momoshop.com.tw' },
+    { name:'東森購物', url:'https://www.etmall.com.tw' },
+    { name:'環球Online', url:'https://www.twglobalmall.com' },
+    { name:'指定品牌官網' }
+  ]},
+  { id:'mall',  title:'百貨／購物中心',emoji:'🏬', color:'#f0f8ea', brands:[
+    { name:'環球購物中心', sub:'全台', url:'https://www.twglobalmall.com' },
+    { name:'微風', sub:'北部', url:'https://www.breezecenter.com' },
+    { name:'CITYLINK', sub:'北部', url:'https://www.citylink.tw' },
+    { name:'漢神洲際購物廣場', sub:'中部', url:'https://www.hanshin.com.tw' },
+    { name:'中友百貨', sub:'中部', url:'https://www.chungyo.com' },
+    { name:'廣三SOGO百貨', sub:'中部', url:'https://www.kssogo.com.tw' },
+    { name:'大樂購物中心', sub:'南部' },
+    { name:'義享時尚廣場', sub:'南部', url:'https://www.esky-mall.com.tw' },
+    { name:'樂購廣場', sub:'南部' },
+    { name:'耐斯廣場', sub:'南部', url:'https://www.niceplaza.com' },
+    { name:'大立百貨', sub:'南部', url:'https://www.talee.com.tw' },
+    { name:'屏東太平洋百貨', sub:'南部', url:'https://www.pacific-mall.com.tw' }
+  ]},
+  { id:'cloth', title:'服飾／鞋品',   emoji:'👕', color:'#f0f8ea', brands:[
+    { name:'NET', sub:'服飾', url:'https://www.net-fashion.net' },
+    { name:'CACO', sub:'服飾', url:'https://www.caco.com.tw' },
+    { name:'G2000', sub:'服飾', url:'https://www.g2000.com.tw' },
+    { name:'WAVE SHINE', sub:'門市與官網', url:'https://www.waveshine.com' },
+    { name:'LA NEW', sub:'鞋品', url:'https://www.lanew.com.tw' },
+    { name:'阿瘦皮鞋', sub:'鞋品', url:'https://www.kao-yi.com.tw' },
+    { name:'D+AF', sub:'APP與官網購物', url:'https://www.daf-shoes.com' },
+    { name:'美津濃', sub:'官網', url:'https://www.mizuno.com.tw' },
+    { name:'統一獅', sub:'官網', url:'https://www.uni-lions.com.tw' },
+    { name:'味全龍', sub:'官網' },
+    { name:'好感未來', sub:'官網' }
+  ]},
+  { id:'pharm', title:'生活零售／藥妝',emoji:'💊', color:'#f0f8ea', brands:[
+    { name:'大九九大賣場' },
+    { name:'日藥本舖', url:'https://www.jp-medical.com' }
+  ]},
+  { id:'highway',title:'國道休息區／伴手禮',emoji:'🛣️',color:'#f0f8ea', brands:[
+    { name:'南仁湖集團', url:'https://www.nanrenhu.com.tw' },
+    { name:'新東陽', url:'https://www.hty.com.tw' }
+  ]},
+  { id:'book',  title:'文具／書局',   emoji:'📚', color:'#f0f8ea', brands:[
+    { name:'101文具' },
+    { name:'金玉堂' },
+    { name:'金石堂', url:'https://www.kingstone.com.tw' },
+    { name:'敦煌書局', url:'https://www.cavesbooks.com.tw' },
+    { name:'新生活書局' }
+  ]},
+  { id:'pet',   title:'寵愛毛小孩',   emoji:'🐾', color:'#f0f8ea', brands:[
+    { name:'東森寵物雲' },
+    { name:'貓狗大棧' }
+  ]},
+  { id:'trans', title:'計程車／共享運具',emoji:'🚕',color:'#f0f8ea', brands:[
+    { name:'55688', sub:'掃碼付款', url:'https://www.55688.com.tw' },
+    { name:'Yoxi', sub:'APP綁定付款', url:'https://www.yoxi.com' },
+    { name:'高雄市YouBike', sub:'APP綁定付款', url:'https://www.youbike.com.tw' }
+  ]},
+  { id:'course',title:'線上課程',     emoji:'🎓', color:'#f0f8ea', brands:[
+    { name:'hahow', url:'https://hahow.in' },
+    { name:'AmazingTalker', url:'https://www.amazingtalker.com' },
+    { name:'TutorABC', url:'https://www.tutorabc.com' },
+    { name:'PressPlay', url:'https://www.pressplay.cc' }
+  ]},
+  { id:'laundry',title:'洗衣',       emoji:'🧺', color:'#f0f8ea', brands:[
+    { name:'SeSA洗衣吧' },
+    { name:'Oday自助洗衣' }
+  ]},
+  { id:'travel',title:'旅宿平台',    emoji:'🏨', color:'#f0f8ea', brands:[
+    { name:'AsiaYo', url:'https://www.asiayo.com' }
+  ]},
+  { id:'japan', title:'旅日必備',    emoji:'🗾', color:'#f0f8ea', brands:[
+    { name:'PayPay', url:'https://paypay.ne.jp' }
+  ]},
+  { id:'other', title:'其他',        emoji:'📌', color:'#f0f8ea', brands:[
+    { name:'小林眼鏡', url:'https://www.kobayashi.com.tw' },
+    { name:'i郵箱', url:'https://www.post.gov.tw' },
+    { name:'in89豪華影城', url:'https://www.in89.com.tw' }
+  ]}
+];
+
+// ========== Render helpers ==========
+function renderBrand(b){
+  const hasUrl = b.url && b.url !== '';
+  if(typeof b === 'string'){
+    return `<div class="brand-tag"><span class="dot"></span><span class="brand-name">${b}</span></div>`;
+  }
+  const nameHtml = hasUrl
+    ? `<a href="${b.url}" target="_blank" rel="noopener"><span class="dot"></span><span class="brand-name">${b.name}</span></a>`
+    : `<span class="dot"></span><span class="brand-name">${b.name}</span>`;
+  return `<div class="brand-tag${hasUrl?' has-link':''}">${nameHtml}${b.sub ? `<span class="brand-sub">${b.sub}</span>` : ''}</div>`;
+}
+
+function countBrands(cat){
+  return cat.brands.reduce((a,b) => a + (typeof b === 'string' ? 1 : 1), 0);
+}
+
+function render(){
+  const nav = document.getElementById('navBar');
+  const sections = document.getElementById('categorySections');
+  const stats = document.getElementById('statsBar');
+  const total = CATEGORIES.reduce((a,c) => a + countBrands(c), 0);
+
+  // Nav chips
+  nav.innerHTML = `<div class="nav-chip active" data-cat="all">全部</div>` +
+    CATEGORIES.map(c => `<div class="nav-chip" data-cat="${c.id}">${c.emoji} ${c.title}</div>`).join('');
+
+  // Stats
+  stats.innerHTML = `
+    <div class="stat-item">📌 <strong>${CATEGORIES.length}</strong> 大分類</div>
+    <div class="stat-item">🏷️ <strong>${total}</strong> 個品牌／通路</div>
+    <div class="stat-item">💚 <strong>全台各地</strong> 皆可使用</div>
+  `;
+
+  // Sections
+  sections.innerHTML = CATEGORIES.map(c => {
+    const count = countBrands(c);
+    return `
+    <div class="section" data-category="${c.id}">
+      <div class="section-header">
+        <div class="emoji" style="background:${c.color}">${c.emoji}</div>
+        <h2>${c.title}</h2>
+        <span class="count-badge">${count} 家</span>
+      </div>
+      <div class="brand-grid">
+        ${c.brands.map(renderBrand).join('')}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ========== Filter ==========
+let activeCat = 'all';
+let searchTerm = '';
+
+function filter(){
+  const q = searchTerm.toLowerCase().trim();
+  const sections = document.querySelectorAll('.section');
+  const heroCard = document.querySelector('.hero-card');
+  let visibleCount = 0;
+
+  sections.forEach(sec => {
+    const cat = sec.dataset.category;
+    const catMatch = activeCat === 'all' || activeCat === cat;
+    if(!catMatch){ sec.classList.add('hidden'); return; }
+
+    if(q === ''){
+      sec.classList.remove('hidden');
+      visibleCount++;
+      return;
+    }
+
+    const text = sec.textContent.toLowerCase();
+    if(text.includes(q)){
+      sec.classList.remove('hidden');
+      visibleCount++;
+    } else {
+      sec.classList.add('hidden');
+    }
+  });
+
+  // Hero card: only show when filter is "all" or "twqr", and no search
+  if(heroCard){
+    const heroVisible = (activeCat === 'all' || activeCat === 'twqr') && q === '';
+    heroCard.classList.toggle('hidden', !heroVisible);
+  }
+
+  updateCount(visibleCount);
+}
+
+function updateCount(visible){
+  const total = CATEGORIES.reduce((a,c) => a + countBrands(c), 0);
+  const el = document.getElementById('resultCount');
+  if(searchTerm.trim() || activeCat !== 'all'){
+    el.textContent = `找到 ${visible} 個分類`;
+  } else {
+    el.textContent = `${total} 個品牌`;
+  }
+}
+
+// ========== Events ==========
+document.getElementById('navBar').addEventListener('click', e => {
+  const chip = e.target.closest('.nav-chip');
+  if(!chip) return;
+  document.querySelectorAll('.nav-chip').forEach(c => c.classList.remove('active'));
+  chip.classList.add('active');
+  activeCat = chip.dataset.cat;
+  filter();
+});
+
+document.getElementById('searchInput').addEventListener('input', e => {
+  searchTerm = e.target.value;
+  filter();
+});
+
+// Back to top button
+window.addEventListener('scroll', () => {
+  document.getElementById('backTop').classList.toggle('show', window.scrollY > 400);
+});
+
+// ========== Init ==========
+render();
+filter();</script>
+</body>
+</html>
